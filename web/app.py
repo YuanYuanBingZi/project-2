@@ -21,13 +21,12 @@ def parse_config(config_paths):
 
 config = parse_config(["credentials.ini", "default.ini"])
 port = config["SERVER"]["PORT"]
-docroot = config["SERVER"]["DOCROOT"]
 
 app = Flask(__name__)
 
 @app.route("/<path:name>")
 def index(name):
-    path = docroot + name
+    path = './pages/' + name
     if ".." in name or "~" in name:
         abort(403)
     elif os.path.exists(path):
